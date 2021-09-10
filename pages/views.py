@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 
 from .models import Post, BlogPost
 
@@ -30,3 +30,8 @@ class AboutPageView(TemplateView):
 class BlogListView(ListView):
     model = BlogPost
     template_name = 'blog.html'
+
+
+class BlogPostDetailView(DetailView):
+    model = BlogPost
+    template_name = 'post_detail.html'
