@@ -1,8 +1,10 @@
+from .models import Post, BlogPost
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import (
+    TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView)
+from django.urls import reverse_lazy
 
-from .models import Post, BlogPost
 
 # Create your views here.
 
@@ -35,3 +37,21 @@ class BlogListView(ListView):
 class BlogPostDetailView(DetailView):
     model = BlogPost
     template_name = 'post_detail.html'
+
+
+class BlogCreateView(CreateView):
+    model = BlogPost
+    template_name = 'post_new.html'
+    fields = ['title', 'author', 'body']
+
+
+class BlogUpdateView(UpdateView):
+    model = BlogPost
+    template_name = 'post_edit.html'
+    fields = ['title', 'body']
+
+
+class BlogDeleteView(DeleteView):
+    model = BlogPost
+    template_name = 'post_delete.html'
+    success_url = reverse_lazy('blog')
